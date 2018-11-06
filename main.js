@@ -15,7 +15,7 @@ floor[i].addEventListener('click', function(e) {
     if (destination != currentFloor) {
         Object.assign(floor[destination].style,{backgroundColor:"yellow"});
         }
-       
+    moving();    
   });
 }
 
@@ -31,4 +31,29 @@ function Elevator(buttonPushed) {
     } else {
         destination = 4;
     }
+}
+
+function moving() {
+
+    var interval = setInterval(function() {
+
+    if (currentFloor == destination) {
+        clearInterval(interval);
+
+    } else if(currentFloor <= destination) {
+        currentFloor++;
+        lastFloor = currentFloor;
+        Object.assign(floor[currentFloor].style,{backgroundColor:"white"});
+        lastFloor--;    
+        Object.assign(floor[(lastFloor)].style,{backgroundColor:"black"});
+
+    } else if (currentFloor >= destination) {
+        currentFloor--;
+        lastFloor = currentFloor;
+        Object.assign(floor[currentFloor].style,{backgroundColor:"white"});
+        lastFloor++;
+        Object.assign(floor[lastFloor].style,{backgroundColor:"black"});
+    }
+
+    },1000);
 }
